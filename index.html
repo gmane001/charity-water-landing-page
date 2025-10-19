@@ -9,7 +9,7 @@
 <body>
   <header class="hero">
     <nav>
-      <div class="logo">charity:<span>water</span></div>
+  <div class="logo"><img src="logo2.webp" alt="charity: water" class="logo-img" /></div>
       <ul class="nav-links">
         <li><a href="#">Home</a></li>
         <li><a href="#">Our Mission</a></li>
@@ -17,8 +17,9 @@
         <li><a href="#">Donate</a></li>
       </ul>
     </nav>
+\
 
-    <div class="hero-content">
+    <div class="hero-content text-box">
       <h1>Pour Your Passion into Purpose</h1>
       <p>When youth take action, the world feels it — each drop of effort helping bring clean, life-giving water to millions.</p>
       <a href="#" class="btn-primary">Join the Movement</a>
@@ -35,13 +36,51 @@
         <a href="#" class="btn-secondary">Learn More</a>
       </div>
       <div class="image">
-        <img src="placeholder-water.jpg" alt="Students supporting charity water">
+        <!-- Inline poster with caption overlaid on the original video poster -->
+        <div class="video-wrapper">
+          <div class="video-poster" data-src="https://www.youtube.com/embed/yPxMOzN0Uq4" style="background-image: url('https://img.youtube.com/vi/yPxMOzN0Uq4/hqdefault.jpg')">
+            <div class="video-caption">Life without Clean Water:</div>
+            <span class="sr-only">Play video: Empowering students</span>
+          </div>
+        </div>
+      </div>
+      <!-- Floating video box (overlays right side of about text on wide screens) -->
+      <div class="floating-video" aria-hidden="false">
+        <div class="video-poster" data-src="https://www.youtube.com/embed/yPxMOzN0Uq4" style="background-image: url('https://img.youtube.com/vi/yPxMOzN0Uq4/hqdefault.jpg')">
+          <div class="video-caption">Life without Clean Water:</div>
+          <span class="sr-only">Play video: Empowering students</span>
+        </div>
       </div>
     </div>
+  </section>
   </section>
 
   <footer>
     <p>© 2025 charity: water | Designed by Gavin Manela</p>
   </footer>
 </body>
+<script>
+  // Lazy-load YouTube iframe when poster is clicked
+  document.addEventListener('click', function (e) {
+    var poster = e.target.closest('.video-poster');
+    if (!poster) return;
+    var src = poster.getAttribute('data-src');
+    if (!src) return;
+    var iframe = document.createElement('iframe');
+    iframe.setAttribute('src', src + '?autoplay=1');
+    iframe.setAttribute('title', 'YouTube video player');
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    // place iframe inside a wrapper that matches the poster sizing
+    var wrapper = document.createElement('div');
+    wrapper.style.position = 'relative';
+    wrapper.style.width = '100%';
+    wrapper.style.height = '100%';
+    wrapper.appendChild(iframe);
+    poster.replaceWith(wrapper);
+  });
+</script>
 </html>
